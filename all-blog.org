@@ -1,0 +1,27 @@
+#+hugo_base_dir: E:/blog/
+#+hugo_section: post
+#+hugo_auto_set_lastmod: t
+#+hugo_custom_front_matter: :author "yellowfishe"
+#+hugo_code_femce: nil
+#+STARTUP: logdrawer
+
+
+* Blog Ideas
+** TODO first blog
+:PROPERTIES:
+:EXPORT_FILE_NAME: first-blog
+:END:
+
+*** headline 3
+这是我用emacs写的第一篇博客，感觉还是不错的
+** TODO second blog
+:PROPERTIES:
+:EXPORT_FILE_NAME: second-blog
+:END:
+
+*** 这是我第二篇博客，我认为我需要好好写一写  :emacs:
+
+- [ ] 我的生活
+- [ ] 我的学习
+
+*** 但是我不是很这么认为
