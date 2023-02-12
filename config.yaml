@@ -2,25 +2,25 @@ baseurl: https://example.com
 languageCode: en-us
 theme: hugo-theme-stack
 paginate: 5
-title: Example Site
+title: YellowFish
 
 languages:
     en:
         languageName: English
-        title: Example Site
-        description: Example description
+        title: Yellowfish
+        description: My Blog
         weight: 1
     zh-cn:
         languageName: 中文
-        title: 演示站点
-        description: 演示说明
+        title: Yellowfish
+        description: 我的博客
         weight: 2
-    ar:
-        languageName: عربي
-        languagedirection: rtl
-        title: موقع تجريبي
-        description: وصف تجريبي
-        weight: 3
+#    ar:
+#        languageName: عربي
+#        languagedirection: rtl
+#        title: موقع تجريبي
+#        description: وصف تجريبي
+#        weight: 3
 
 # Change it to your Disqus shortname before using
 disqusShortname: hugo-theme-stack
@@ -57,11 +57,11 @@ params:
 
     sidebar:
         emoji: 🍥
-        subtitle: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        subtitle: 每天抽出一分钟时间学习，让你的生命更加精彩
         avatar:
             enabled: true
             local: true
-            src: img/avatar.png
+            src: static/img/head.jpg
 
     article:
         math: false
@@ -196,18 +196,18 @@ params:
 menu:
     main: []
 
-    social:
-        - identifier: github
-          name: GitHub
-          url: https://github.com/CaiJimmy/hugo-theme-stack
-          params:
-              icon: brand-github
+    # social:
+    #     - identifier: github
+    #       name: GitHub
+    #       url: https://github.com/CaiJimmy/hugo-theme-stack
+    #       params:
+    #           icon: brand-github
 
-        - identifier: twitter
-          name: Twitter
-          url: https://twitter.com
-          params:
-              icon: brand-twitter
+    #     - identifier: twitter
+    #       name: Twitter
+    #       url: https://twitter.com
+    #       params:
+    #           icon: brand-twitter
 
 related:
     includeNewer: true
