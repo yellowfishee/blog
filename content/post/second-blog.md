@@ -1,7 +1,8 @@
 +++
 title = "second blog"
-lastmod = 2023-02-12T17:23:46+08:00
-draft = true
+date = 2023-02-12T18:01:00+08:00
+lastmod = 2023-02-12T18:01:29+08:00
+draft = false
 author = "yellowfishe"
 +++
 
