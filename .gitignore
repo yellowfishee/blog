@@ -26,4 +26,6 @@ _testmain.go
 assets/jsconfig.json
 .DS_Store
 
+*.html
+
 /back
