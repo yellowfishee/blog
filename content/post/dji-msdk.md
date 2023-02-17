@@ -1,7 +1,7 @@
 +++
 title = "DJI MSDK"
-ate = 2023-02-17T16:52:00+08:00
-lastmod = 2023-02-17T16:59:01+08:00
+date = 2023-02-17T16:52:00+08:00
+lastmod = 2023-02-17T17:04:02+08:00
 tags = ["DJI"]
 draft = false
 author = "yellowfishe"
