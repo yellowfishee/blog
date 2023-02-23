@@ -1,7 +1,7 @@
 +++
 title = "JVM 读书记录"
 date = 2023-02-23
-lastmod = 2023-02-23T14:56:46+08:00
+lastmod = 2023-02-23T15:03:12+08:00
 draft = false
 katex = true
 [menu]
@@ -11,7 +11,7 @@ katex = true
     weight = 3
 +++
 
-## 概述部分 {#概述部分}
+## 概述部分 <span class="tag"><span class="java">java</span><span class="jvm">jvm</span></span> {#概述部分}
 
 
 ## Java内存区域与内存溢出异常 {#java内存区域与内存溢出异常}
