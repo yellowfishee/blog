@@ -1,8 +1,8 @@
 +++
 title = "JVM 读书记录"
 date = 2023-02-23
-lastmod = 2023-02-23T18:11:03+08:00
-tags = ["JVM", [",", "JAVA"]]
+lastmod = 2023-02-23T18:14:39+08:00
+tags = ["JVM", "JAVA"]
 draft = false
 katex = true
 [menu]
