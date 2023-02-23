@@ -29,3 +29,5 @@ assets/jsconfig.json
 *.html
 
 /back
+
+*.org
