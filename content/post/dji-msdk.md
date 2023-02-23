@@ -1,10 +1,10 @@
 +++
 title = "DJI MSDK"
 date = 2023-02-17T16:52:00+08:00
-lastmod = 2023-02-17T17:04:02+08:00
+lastmod = 2023-02-17T17:27:04+08:00
 tags = ["DJI"]
 draft = false
-author = "yellowfishe
+author = "yellowfishe"
 +++
 
 ## 背景 {#背景}
@@ -15,7 +15,7 @@ author = "yellowfishe
 ## 开始 {#开始}
 
 
-## 环境 {#环境}
+### 环境 {#环境}
 
 简单介绍一下本次使用的环境，由于另外一台电脑没有过多的配置，所以采用的直接就是Audroid Studio自带的配置，这里说一下主要出现的问题。
 
