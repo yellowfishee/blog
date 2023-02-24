@@ -1,7 +1,7 @@
 +++
 title = "23种设计模式(Java)"
 date = 2023-02-23
-lastmod = 2023-02-23T19:36:44+08:00
+lastmod = 2023-02-24T14:26:33+08:00
 tags = ["Java", "设计模式"]
 draft = false
 katex = true
@@ -183,3 +183,329 @@ public abstract class Coder {
 所以对于这种情况我们可以不再继承自Coder，而是去继承People类。
 
 里氏替换原则也是避开原则实现开闭原则重要方式之一。
+
+
+### 依赖倒转原则 {#依赖倒转原则}
+
+依赖倒转原则（Dependence Inversion Principle）也是我们一直在使用的，最明显的就是我们的Spring框架了。
+
+> 高层模块不应依赖于底层模块，它们都应该依赖抽象。抽象不应依赖于细节，细节应该依赖于抽象。
+
+下面我们来看一段代码演示：
+
+```java
+package org.example;
+
+public class Main {
+    public static void main(String[] args) {
+
+    }
+
+    static class UserMapper {
+    }
+
+    static class UserService{
+	UserMapper mapper = new UserMapper();
+    }
+
+    static class UserController {
+	UserService service = new UserService();
+    }
+}
+```
+
+但是如果有一天我们的需求发生了改变，需要对代码进行优化。导致代码变成了下面这个样子：
+
+```java
+package org.example;
+
+public class Main {
+    public static void main(String[] args) {
+
+    }
+
+    static class UserMapper {
+    }
+
+    // 直接修改这里
+    static class UserNewService{
+	UserMapper mapper = new UserMapper();
+    }
+
+    static class UserController {
+	// 这里会受到影响
+	UserService service = new UserService();
+	UserNewService serv =new UserNewService();
+    }
+}
+```
+
+我们发现，我们的各个模块之间实际上是具有强关联的，一个模块是直接指定依赖于另一个模块，虽然这样结构清晰，但是底层模块的变动，会直接影响到其他依赖于它的高层模块，如果我们的项目变得很庞大，那么这样的修改将是一场灾难。
+
+而有了Spring框架之后，我们的开发模式就发生了变化：
+
+```java
+package org.example;
+
+import javax.annotation.Resource;
+
+public class Main {
+    public static void main(String[] args) {
+
+	UserController userController = new UserController();
+    }
+
+    interface UserMapper {
+	// 我们只在这里面定义方法
+    }
+
+    static class UserMapperImpl implements UserMapper {
+
+    }
+
+    interface UserService {
+
+    }
+
+    static class UserServiceImpl implements UserService {
+	@Resource
+	UserMapper userMapper;
+    }
+
+    static class UserController {
+	@Resource
+	UserService service;
+    }
+
+}
+```
+
+可以看到，通过使用接口，我们就可以将原有的强关联给弱化，我们只需要知道接口中定义了什么方法然后去使用即可，而具体的操作由接口的实现类来完成，并由Spring来为我们注入，而不是我们通过硬编码的方式去指定。
+
+
+### 接口隔离原则 {#接口隔离原则}
+
+接口隔离原则（Interface Segregation Principle, ISP）实际上是对接口的细化。
+
+> 客户端不应依赖那些它不需要的接口。
+
+我们在定义接口的时候，一定要注意控制接口的粒度，比如下面的例子：
+
+```java
+
+interface Device {
+    String getCpu();
+    String getType();
+    String getMemory();
+}
+
+//电脑就是一种电子设备，那么我们就实现此接口
+class Computer implements Device {
+
+    @Override
+    public String getCpu() {
+	return "i9-12900K";
+    }
+
+    @Override
+    public String getType() {
+	return "电脑";
+    }
+
+    @Override
+    public String getMemory() {
+	return "32G DDR5";
+    }
+}
+
+//电风扇也算是一种电子设备
+class Fan implements Device {
+
+    @Override
+    public String getCpu() {
+	return null;   //就一个破风扇，还需要CPU？
+    }
+
+    @Override
+    public String getType() {
+	return "风扇";
+    }
+
+    @Override
+    public String getMemory() {
+	return null;   //风扇也不需要内存吧
+    }
+}
+```
+
+虽然我们定义了一个Device接口，但是由于此接口的粒度不够细，虽然比较契合电脑这种设备，但是不适合风扇这种设备，因为风扇压根就不需要CPU和内存，所以风扇完全不需要这些方法。这时我们就必须要对其进行更细粒度的划分：
+
+```java
+interface SmartDevice {   //智能设备才有getCpu和getMemory
+    String getCpu();
+    String getType();
+    String getMemory();
+}
+
+interface NormalDevice {   //普通设备只有getType
+    String getType();
+}
+
+//电脑就是一种电子设备，那么我们就继承此接口
+class Computer implements SmartDevice {
+
+    @Override
+    public String getCpu() {
+	return "i9-12900K";
+    }
+
+    @Override
+    public String getType() {
+	return "电脑";
+    }
+
+    @Override
+    public String getMemory() {
+	return "32G DDR5";
+    }
+}
+
+//电风扇也算是一种电子设备
+class Fan implements NormalDevice {
+    @Override
+    public String getType() {
+	return "风扇";
+    }
+}
+```
+
+
+### 合成复用原则 {#合成复用原则}
+
+合成复用原则（Composite Reuse Principle）的核心就是委派。
+
+> 优先使用对象组合，而不是通过继承来达到复用的目的。
+
+在一个新的对象里面使用一些已有的对象，使之成为新对象的一部分，新的对象通过向这些对象的委派达到复用已有功能的目的。实际上我们在考虑将某个类通过继承关系在子类得到父类已经实现的方法之外（比如A类实现了连接数据库的功能，恰巧B类中也需要，我们就可以通过继承来获得A已经写好的连接数据库的功能，这样就能直接复用A中已经写好的逻辑）我们应该应该优先地去考虑使用合成的方式来实现复用。
+
+比如我们下面的例子：
+
+```java
+class A {
+    static void connectDB() {
+	System.out.println("connect database");
+    }
+
+}
+
+class B extends A {
+    void test() {
+	System.out.println("in B, connect database yes");
+	// 直接调用父类的方法
+	connectDB();
+    }
+}
+```
+
+虽然这样看起来没啥毛病，但是还是存在我们之前说的那个问题，耦合度太高了。
+
+可以看到通过继承的方式实现复用，我们是将类B直接指定继承自类A的，那么如果有一天，由于业务的更改，我们的数据库连接操作，不再由A来负责，而是由新来的C去负责，那么这个时候，我们就不得不将需要复用A中方法的子类全部进行修改，很显然这样是费时费力的。
+
+并且还有一个问题就是，通过继承子类会得到一些父类中的实现细节，比如某些字段或是方法，这样直接暴露给子类，并不安全。
+
+所以，当我们需要实现复用时，可以优先考虑以下操作：
+
+```java
+
+class A {
+    public void connectDB() {
+	System.out.println("connect database");
+    }
+}
+
+class B  {
+    void test(A a) {
+	System.out.println("in B, connect database yes");
+	a.connectDB();
+    }
+}
+```
+
+或者是下面这样的操作：
+
+```java
+class A {
+    public void connectDatabase(){
+	System.out.println("我是连接数据库操作！");
+    }
+}
+
+class B {
+
+    A a;
+    public B(A a){   //在构造时就指定好
+	this.a = a;
+    }
+
+    public void test(){
+	System.out.println("我是B的方法，我也需要连接数据库！");
+	a.connectDatabase();   //也是通过对象A去执行
+    }
+}
+```
+
+当然你也可以抽象一个接口出来，那么它会变得更加的灵活；
+
+
+### 迪米特法则 {#迪米特法则}
+
+迪米特法则（Law of Demeter）又称最少知识原则，是对程序内部数据交互的限制。
+
+> 每一个软件单位对其他单位都只有最少的知识，而且局限于那些与本单位密切相关的软件单位。
+
+简单来说就是，一个类/模块对其他的类/模块有越少的交互越好。当一个类发生改动，那么，与其相关的类（比如用到此类啥方法的类）需要尽可能少的受影响（比如修改了方法名、字段名等，可能其他用到这些方法或是字段的类也需要跟着修改）这样我们在维护项目的时候会更加轻松一些。
+
+其实说白了，还是降低耦合度，我们还是来看一个例子：
+
+```java
+public class Main {
+    public static void main(String[] args) throws IOException {
+	Socket socket = new Socket("localhost", 8080);   //假设我们当前的程序需要进行网络通信
+	Test test = new Test();
+	test.test(socket);   //现在需要执行test方法来做一些事情
+    }
+
+    static class Test {
+	/**
+	 * 比如test方法需要得到我们当前Socket连接的本地地址
+	 */
+	public void test(Socket socket){
+	    System.out.println("IP地址："+socket.getLocalAddress());
+	}
+    }
+}
+```
+
+可以看到，虽然上面这种写法没有问题，我们提供直接提供一个Socket对象，然后再由test方法来取出IP地址，但是这样显然违背了迪米特法则，实际上这里的test方法只需要一个IP地址即可，我们完全可以直接传入一个字符串，而不是整个Socket对象，我们需要保证与其他类的交互尽可能的少。
+
+就像我们在餐厅吃完了饭，应该是我们自己扫码付款，而不是直接把手机交给老板来帮你操作付款。
+
+要是某一天，Socket类中的这些方法发生修改了，那我们就得连带着去修改这些类，很麻烦。
+
+所以，我们来改进改进：
+
+```java
+public class Main {
+    public static void main(String[] args) throws IOException {
+	Socket socket = new Socket("localhost", 8080);
+	Test test = new Test();
+	test.test(socket.getLocalAddress().getHostAddress());  //在外面解析好就行了
+    }
+
+    static class Test {
+	public void test(String str){   //一个字符串就能搞定，就没必要丢整个对象进来
+	    System.out.println("IP地址："+str);
+	}
+    }
+}
+```
