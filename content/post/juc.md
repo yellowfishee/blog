@@ -1,7 +1,7 @@
 +++
 title = "Java 多线程技术"
 date = 2023-02-20
-lastmod = 2023-02-24T16:20:14+08:00
+lastmod = 2023-02-24T17:13:05+08:00
 tags = ["JUC", "Java", "面试"]
 draft = false
 katex = true
@@ -147,3 +147,106 @@ katex = true
 
 
 #### Java中线程的状态 {#java中线程的状态}
+
+关注这个题目的说法众说纷纭，常见的说法就是5、6、7这三种其实都可以，那么我们依次来说一下这三种说法到底是为什么吧。
+
+首先就是五种线程状态，那么这种说法的根据呢就是操作系统层面的了。
+![](/ox-hugo/2023-02-24_16-27-02_screenshot.png)
+下面来解释一下这五个状态
+
+-   new status：这个状态的线程处于刚刚被创建的状态，线程还没有启动，当你启动之后就到了下一个状态，ready状态
+-   ready status：这个状态的线程已经在准备状态了。当CPU调度的时候，就进行到了下一个阶段，running阶段。
+-   running status：这个阶段的线程已经在执行自己携带的字节码等操作。如果在这个时候我们对线程进行了如wait()、sleep()、jonin()等阻塞操作，那么我们的线程会进入到一个waiting的status中去，在这个状态中的线程CPU是不会去调度的。然后执行结束，倒了TERMINATED status
+
+Java层面的6种状态
+![](/ox-hugo/2023-02-24_16-54-00_screenshot.png)
+
+-   new：Thread对象被创建出来了，但是还没有执行start方法。
+-   runnable：Thread对象调用了start方法，就成为了runnable方法，（CPU调度/没有调度），它说的是可以被执行，而不是一定在执行当中。是一个就绪和运行中同时存在的状态。
+-   blocked、waiting、time_waiting：都可以理解为是阻塞、等待状态，因为处于这三种状态下，CPU 不会调度当前线程。
+-   blocked：synchronized没有拿到同步锁，被阻塞的情况
+-   waiting：调用wait方法就会处于WAITING状态，需要被手动唤醒
+-   time_waiting：调用sleep方法或者join方法，会被自动唤醒，无需手动唤醒
+-   terminated：run方法执行完毕，线程生命周期到头了。
+
+在代码中验证一下这个说法是不是对的
+NEW：
+
+```java
+public static void main(String[] args) {
+    Thread t1 = new Thread(() -> {
+
+    });
+    System.out.println(t1.getState()); // NEW
+}
+```
+
+RUNNABLE:
+
+```java
+public static void main(String[] args) {
+    Thread t1 = new Thread(() -> {
+	while (true) {
+
+	}
+    });
+    t1.start();
+    System.out.println(t1.getState()); // RUNNABLE
+}
+```
+
+BLOCKED:
+
+```java
+public static void main(String[] args) throws InterruptedException {
+    Object obj = new Object();
+    Thread t1 = new Thread(() -> {
+	synchronized (obj) {
+
+	}
+    });
+
+    synchronized (obj) {
+	t1.start();
+	Thread.sleep(496);
+	System.out.println(t1.getState()); // BLOCKED
+    }
+}
+```
+
+WAITING:
+
+```java
+public static void main(String[] args) throws InterruptedException {
+    Object obj = new Object();
+    Thread t1 = new Thread(() -> {
+	synchronized (obj) {
+	    try {
+		obj.wait(); // 等待notify
+	    } catch (InterruptedException e) {
+		e.printStackTrace();
+	    }
+	}
+    });
+    t1.start();
+    Thread.sleep(500);
+    System.out.println(t1.getState()); //WAITING
+}
+```
+
+TIMED_WAITING:
+
+```java
+public static void main(String[] args) throws InterruptedException {
+    Thread t1 = new Thread(() -> {
+	try {
+	    Thread.sleep(1000);
+	} catch (InterruptedException e) {
+	    e.printStackTrace();
+	}
+    });
+    t1.start();
+    Thread.sleep(500);
+    System.out.println(t1.getState()); // TIMED_WAITING
+}
+```
