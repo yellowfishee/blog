@@ -1,0 +1,40 @@
++++
+title = "Spring"
+date = 2023-02-25
+lastmod = 2023-02-25T19:32:19+08:00
+tags = ["spring", "springboot", "springmvc", "springcloud", "面试", "java", "微服务"]
+draft = false
+katex = true
+[menu]
+  [menu.main]
+    identifier = "spring"
+    parent = "docs"
+    weight = 3
++++
+
+## Spring {#spring}
+
+
+### 谈谈对Spring的理解 {#谈谈对spring的理解}
+
+Spring是一个2004年发布的一个开源框架，现在已经到了6.0的版本，在这个时候还是纯XML配置的时代，到了现在的纯注解开发，提高了开发者的效率，对开发的帮助是十分大的。
+
+Spring是一个轻量级的IoC和AOP容器框架。是为java应用程序提供基础性服务的一套框架，目的是用于简化企业引用程序的开发，它使得开发者只需要关心业务需求。常见的配置方式有三种：基于XML的配置、基于注解的配置、基于Java的配置
+
+主要由以下及几个模块组成：
+
+1.  Spring Core： 核心类库，提供IoC服务；
+2.  Sprint Context：提供框架式的Bean访问方式，以及企业级功能（JNDI、定时任务等）；
+3.  Spring AOP：提供AOP服务；
+4.  Spring DAO：对JDBC的抽象，简化了数据访问异常的处理；
+5.  Spring ORM：对现有ORM框架的支持；
+6.  Spring Web：提供了基本的面向Web的综合特性，例如多方文件上传；
+7.  Spring Mvc：提供面向Web引用的Model－View－Controller实现。
+
+Spring的好处：
+
+| 好处        | 说明                                         |
+|-----------|--------------------------------------------|
+| 轻量        | Spring是轻量的，基本的版本大约2MB            |
+| 控制反转    | Spring通过控制反转实现了松耦合，对象们给出他们的依赖，而不是创建和查找依赖的对象们 |
+| 面向切面编程(AOP) | Spring支持面向切面的变成，并且把引用业务逻辑和系统服务分开。 |
