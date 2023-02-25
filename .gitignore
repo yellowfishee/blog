@@ -32,4 +32,4 @@ assets/jsconfig.json
 
 *.org
 ./org
-
+/org/images
