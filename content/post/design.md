@@ -1,7 +1,7 @@
 +++
 title = "23种设计模式(Java)"
 date = 2023-02-23
-lastmod = 2023-02-26T18:43:17+08:00
+lastmod = 2023-02-26T19:31:04+08:00
 tags = ["Java", "设计模式"]
 draft = false
 katex = true
@@ -984,3 +984,122 @@ public enum Singleton {
     ```
 
     根据上面的例子我们可以发现，我们写进文件中的object读出来两次之后，输出的地址是不一样的地址，由此可以证明，我们的序列化操作破坏了单例模式。
+
+    -   反射操作
+        ```java
+        package org.example.singleton.demo08;
+
+        import java.lang.reflect.Constructor;
+
+        public class Client {
+            public static void main(String[] args) throws Exception {
+        	// 获取字节码对象
+        	Class clazz = Singleton.class;
+
+        	// 获取无参构造方法
+        	Constructor cons = clazz.getDeclaredConstructor();
+
+        	// 取消访问检查
+        	cons.setAccessible(true);
+
+        	// 创建对象
+        	Singleton s1 = (Singleton) cons.newInstance();
+        	Singleton s2 = (Singleton) cons.newInstance();
+
+        	/**
+        ​	 * false
+        	 */
+        	System.out.println(s1 == s2);
+            }
+        }
+
+        ```
+
+<!--list-separator-->
+
+-  问题的解决
+
+    -   序列化、反序列化方式破坏单例模式的解决方法在Singleton类中添加 `readResolve()` 方法，在反序列化时被反射调用，如果定义了这个方法，就返回这个方法的值，如果没有定义，则返回新new出来的对象。
+
+        **Singleton类**
+        ```java
+        package org.example.singleton.demo07;
+
+        import java.io.Serializable;
+
+        public class Singleton implements Serializable {
+            private static Singleton instance;
+
+            private Singleton() {}
+
+            private static class SingletonHolder {
+        	private static final Singleton INSTANCE = new Singleton();
+            }
+
+            public static Singleton getInstance() {
+        	return SingletonHolder.INSTANCE;
+            }
+
+            // 重写readResolve方法，防止反序列化破坏单例
+            private Object readResolve() {
+        	return SingletonHolder.INSTANCE;
+            }
+        }
+        ```
+
+    -   反射破坏单例模式的解决办法：
+        ```java
+        package org.example.singleton.demo08;
+
+        import java.io.Serializable;
+
+        public class Singleton implements Serializable {
+            private static Singleton instance;
+
+            /**
+        ​     * 这里的构造方法是为了防止反射破坏单例
+        ​     * 不同的实现方法，防止反射破坏单例的方式不一样
+        ​     * 比如说demo07中的SingletonHolder，就是通过静态内部类的方式
+        ​     * 在静态内部内中，如果要防止反射破坏单例，就需要在类中再定义一个flag用来标记是否已经创建过实例
+        ​     * 但是这里的方式，就不需要了
+             */
+            private Singleton() {
+        	synchronized (Singleton.class) {
+        	    if (instance != null) {
+        		throw new RuntimeException("单例模式被侵犯");
+        	    }
+        	}
+            }
+
+            public static Singleton getInstance() {
+        	if (instance == null) {
+        	    synchronized (Singleton.class) {
+        		if (instance == null) {
+        		    instance = new Singleton();
+        		}
+        	    }
+        	}
+        	return instance;
+            }
+        }
+
+        ```
+
+
+#### JDK源码中的单例模式－Runtime类 {#jdk源码中的单例模式-runtime类}
+
+Runtime类就是使用的单例设计模式。
+
+```java
+private static Runtime currentRuntime = new Runtime();
+
+public static Runtime getRuntime() {
+    return currentRuntime;
+}
+
+private Runtime() {
+}
+
+```
+
+我们可以通过这一段源代码看出Runtime是基于饿汉式的单例模式的。
