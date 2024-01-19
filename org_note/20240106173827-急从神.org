@@ -2,6 +2,15 @@
 :ID:       d5096687-d309-4545-aaf0-e9bd508e5a12
 :END:
 #+title: 急从神
+#+HUGO_BASE_DIR: D:/org_blog
+#+DATE: 2024-01-20
+#+HUGO_AUTO_SET_LASTMOD: t
+#+HUGO_TAGS: 
+#+HUGO_CATEGORIES: 
+#+HUGO_DRAFT: false
+# #+HUGO_MENU: :menu "main" :parent "docs" :weight 3
+#+options: author:nil
+#+HUGO_CUSTOM_FRONT_MATTER: :katex true
 * 急则从神
 ~《烟波钓叟歌》~ ：“急则从神缓从门”
 ~《奇门遁甲统宗》~ ：“如逢急难，宜从值符方下而行”

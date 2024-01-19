@@ -2,6 +2,15 @@
 :ID:       d7fa676e-d97b-4d61-9d1f-37072df77088
 :END:
 #+title: 缓从门
+#+HUGO_BASE_DIR: D:/org_blog
+#+DATE: 2024-01-20
+#+HUGO_AUTO_SET_LASTMOD: t
+#+HUGO_TAGS: 
+#+HUGO_CATEGORIES: 
+#+HUGO_DRAFT: false
+# #+HUGO_MENU: :menu "main" :parent "docs" :weight 3
+#+options: author:nil
+#+HUGO_CUSTOM_FRONT_MATTER: :katex true
 * 缓从门
 缓从门的意思就是说事情不太紧急，可以比较从容的选择吉利的时间和吉利的方向去办。
 
