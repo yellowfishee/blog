@@ -1,0 +1,41 @@
+﻿:PROPERTIES:
+:ID:       4fb563ae-830a-462c-896a-36dd06d98b4d
+:END:
+#+title: windows上解决org2pdf的方法
+# - tag :: [[id:5c496ec2-c9c8-4560-bf50-f37e683e597b][emacs]]
+#+LaTeX_HEADER: \usepackage{fontspec}
+#+LaTeX_HEADER: \setmainfont{LXGW ZhenKai}
+
+
+
+* org2pdf
+** 确定问题
+\seqsplit{emacs对中文支持很好，但是Latex相对比较拉胯，所以如何解决这个问题需要仔细思考。我们通过实践之后知道了emacs自带的方法是不行的，经过思考之后，我选择使用手动实现函数的方式来进行解决。}
+
+\seqsplit{问题出现的场景也是：在org->tex时可以正常导出，但是自动将tex->pdf时出现了很大的问题。}
+
+** 解决问题
+\seqsplit{下面的函数就是将所有的步骤都通过手动来操控，但是这里需要记住，我们需要提前安装 =tectonic= 这个优秀的工具。}
+#+begin_src emacs-lisp
+(setq  org-latex-pdf-process '("tectonic %f"))
+(defun convert-org-to-pdf ()
+  "Convert Org file to PDF using tectonic."
+  (interactive)
+  (let ((org-file (buffer-file-name))
+        (tex-file (concat (file-name-sans-extension (buffer-file-name)) ".tex"))
+        (pdf-file (concat (file-name-sans-extension (buffer-file-name)) ".pdf")))
+    (if (and org-file (file-exists-p org-file))
+        (progn
+          ;; Convert Org to LaTeX
+          (message "Converting Org to LaTeX...")
+          (org-latex-export-to-latex)
+          (message "Conversion to LaTeX complete. LaTeX saved to %s" tex-file)
+
+          ;; Convert LaTeX to PDF using tectonic
+          (message "Converting LaTeX to PDF...")
+          (call-process "tectonic" nil nil nil tex-file)
+          (message "Conversion complete. PDF saved to %s" pdf-file))
+
+      (message "Error: Org file not found."))))
+#+end_src
+\seqsplit{最后呢可以完美的解决问题，但是这里需要注意，如果需要修改字体的话，需要一定的操作，也可以直接复制文件上面的tag}
