@@ -1,7 +1,7 @@
 ﻿:PROPERTIES:
 :ID:       36333442-eba7-4137-9439-d78c4c465c8b
 :END:
-#+title: 1901find_peak_grid
+#+title: 1901_find_peak_grid
 - tag :: [[id:f9d147b0-09f1-4e01-bac2-e4b7163fa7ab][LeetCode]]
 #+LaTeX_HEADER: \usepackage{fontspec}
 #+LaTeX_HEADER: \setmainfont{LXGW ZhenKai}
