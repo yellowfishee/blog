@@ -13,4 +13,4 @@
 #+HUGO_CUSTOM_FRONT_MTTER: :katex true
 * 卷一
 ** 释名
-[[id:a0098227-5a85-4991-a4ff-cba4a07bc092][论五行名]]
+[[id:a0098227-5a85-4991-a4ff-cba4a07bc092][释五行名]]
