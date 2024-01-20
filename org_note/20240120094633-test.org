@@ -1,0 +1,16 @@
+﻿:PROPERTIES:
+:ID:       f717a611-645c-4a96-b578-6e7b8f1575c3
+:END:
+#+title: test
+#+HUGO_BASE_DIR: D:/org_blog
+#+DATE: 2024-01-20
+#+HUGO_AUTO_SET_LASTMOD: t
+#+HUGO_TAGS: 
+#+HUGO_CATEGORIES: 
+#+HUGO_DRAFT: false
+# #+HUGO_MENU: :menu "main" :parent "docs" :weight 3
+#+options: author:nil
+#+HUGO_CUSTOM_FRONT_MATTER: :katex true
+
+* 这是一个测试节点
+我需要通过这个测试来知道自己到底适不适合去做一些事情
