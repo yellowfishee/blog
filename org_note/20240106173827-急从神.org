@@ -5,7 +5,7 @@
 #+HUGO_BASE_DIR: D:/org_blog
 #+DATE: 2024-01-20
 #+HUGO_AUTO_SET_LASTMOD: t
-#+HUGO_TAGS: [[id:17860e5d-2718-45dc-a28a-374b3c1f73a2][奇门遁甲]]
+#+HUGO_TAGS: 奇门遁甲
 #+HUGO_CATEGORIES: 
 #+HUGO_DRAFT: false
 # #+HUGO_MENU: :menu "main" :parent "docs" :weight 3
