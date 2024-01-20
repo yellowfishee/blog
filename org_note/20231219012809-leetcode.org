@@ -2,4 +2,13 @@
 :ID:       f9d147b0-09f1-4e01-bac2-e4b7163fa7ab
 :END:
 #+title: LeetCode
+#+HUGO_BASE_DIR: D:/org_blog
+#+DATE: 2024-01-20
+#+HUGO_AUTO_SET_LASTMOD: t
+#+HUGO_TAGS: 
+#+HUGO_CATEGORIES: 
+#+HUGO_DRAFT: false
+# #+HUGO_MENU: :menu "main" :parent "docs" :weight 3
+#+options: author:nil
+#+HUGO_CUSTOM_FRONT_MATTER: :katex true
 
