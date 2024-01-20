@@ -1,0 +1,25 @@
+﻿:PROPERTIES:
+:ID:       1b46bb7e-5d97-4332-8541-2089ef2bce1b
+:END:
+#+title: 五行大义序
+#+HUGO_BASE_DIR: D:/org_blog
+#+DATE: 2024-01-20
+#+HUGO_AUTO_SET_LASTMOD: t
+#+HUGO_TAGS: 五行大义
+#+HUGO_CATEGORIES: 数术
+#+HUGO_DRAFT: false
+# #+HUGO_MENU: :menu "main" :parent "docs" :weight 3
+#+options: author:nil
+#+HUGO_CUSTOM_FRONT_MATTER: :katex true
+
+* 作序
+** 概念
+五行是造化的根源、人伦关系的 =起始凭借= ，万物因为五行发生改变。
+
+并且五行的根本是阴阳，五行在天、地、人中都有不同的表现。
+
+在天为：金、木、水、火、土五星
+
+在地为：金、木、水、火、土五种物质
+
+在人为：仁、义、礼、智、信五种品德
