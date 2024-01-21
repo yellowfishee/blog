@@ -1,6 +1,7 @@
 ﻿:PROPERTIES:
 :ID:       bf0b41e1-3347-4bec-9b1f-84261f8a14fb
 :END:
+- tag :: [[id:3363f631-30a2-4fd6-b464-8850ddae51da][数术]]
 #+title: 五行大义
 #+HUGO_BASE_DIR: D:/org_blog
 #+DATE: 2024-01-20
