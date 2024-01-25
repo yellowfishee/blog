@@ -1,0 +1,22 @@
+﻿:PROPERTIES:
+:ID:       ea9d4443-8fbb-4f15-8f4e-1a41afbb7b24
+:END:
+#+title: 青花瓷
+#+HUGO_BASE_DIR: D:/org_blog
+#+DATE: 2024-01-25T13:29:38+08:00
+#+HUGO_AUTO_SET_LASTMOD: t
+#+HUGO_TAGS: 
+#+HUGO_CATEGORIES: 
+#+HUGO_DRAFT: false
+#+HUGO_MENU: :menu "main" :parent "docs" :weight 3
+#+options: author:nil
+#+HUGO_CUSTOM_FRONT_MATTER: :katex true
+
+* 目录
+醒世、天罡、四正是最重要的。
+
+醒世、客师风采
+
+天罡：核心
+
+四正：
