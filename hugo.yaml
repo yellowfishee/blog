@@ -3,7 +3,7 @@
 baseURL: "http://localhost:1313/"
 title: "只想悠然自在"
 paginate: 5
-theme: [github.com/adityatelange/hugo-PaperMod]
+theme: [PaperMod]
 
 enableInlineShortcodes: true
 enableRobotsTXT: true
